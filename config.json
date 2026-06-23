@@ -1,0 +1,21 @@
+{
+  "search_url": "https://www.profession.hu/allasok/1,0,0,szoftverfejleszt%C5%91%401%401?keywordsearch",
+  "salary_amount": null,
+  "salary_type": "net",
+  "salary_currency": "HUF",
+  "salary_period": "monthly",
+  "keyword_filter": [],
+  "exclude_keywords": [],
+  "max_pages": 25,
+  "max_applications_per_run": 100,
+  "headless": false,
+  "wait_between_actions": [
+    4,
+    8
+  ],
+  "cover_letter": "",
+  "upload_cv_from_profile": true,
+  "accept_marketing": false,
+  "user_email": "",
+  "user_password": ""
+}
