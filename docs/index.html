@@ -57,8 +57,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Phosphor Icons CSS -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/css/style.css">
 </head>
 <body>
     <div class="glass-bg"></div>
@@ -68,13 +68,13 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <i class="fa-solid fa-square-poll-horizontal logo-icon"></i>
+                <i class="ph ph-briefcase logo-icon"></i>
                 <span>Profession<span>Bot</span></span>
             </div>
             
-            <!-- Mobile Menu Toggle Button -->
+            <!-- Mobile Menu Toggle Button (Sandwich Menu) -->
             <button class="menu-toggle" id="menu-toggle-btn" aria-label="Menü megnyitása">
-                <i class="fa-solid fa-bars"></i>
+                <i class="ph ph-list"></i>
             </button>
 
             <div class="nav-links" id="nav-links-container">
@@ -82,7 +82,7 @@
                 <a href="#install" id="nav-install-link">Telepítés</a>
                 <a href="#usage" id="nav-usage-link">Használat</a>
                 <a href="https://github.com/domedav/profession-bot" target="_blank" class="btn btn-secondary" id="nav-github-link">
-                    <i class="fa-brands fa-github"></i> GitHub
+                    <i class="ph ph-github-logo"></i> GitHub
                 </a>
             </div>
         </nav>
@@ -92,13 +92,13 @@
         <!-- Hero Section -->
         <section class="hero container">
             <div class="hero-content">
-                <span class="badge"><i class="fa-solid fa-sparkles"></i> v1.0 Nyílt Forráskód (MIT)</span>
+                <span class="badge"><i class="ph ph-sparkle"></i> Nyílt Forráskód (MIT)</span>
                 <h1>Szerezd meg az álomállásod <span>automatikusan</span></h1>
                 <p class="subtitle">Intelligens álláspályázó asszisztens a profession.hu platformhoz. Böngésző automatizációval tölti ki az űrlapokat, kezeli a nyilatkozatokat, miközben Te a felkészülésre koncentrálhatsz.</p>
                 <div class="cta-buttons">
                     <a href="#install" class="btn btn-primary" id="hero-install-btn">Letöltés és Telepítés</a>
                     <a href="https://github.com/domedav/profession-bot" class="btn btn-secondary" target="_blank" id="hero-github-btn">
-                        <i class="fa-brands fa-github"></i> GitHub Kód
+                        <i class="ph ph-github-logo"></i> GitHub Kód
                     </a>
                 </div>
             </div>
@@ -133,32 +133,32 @@
             <p class="section-subtitle">Modern technológiák és biztonságos működés a sikeres pályázatokért.</p>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-brands fa-firefox"></i></div>
+                    <div class="feature-icon"><i class="ph ph-browser"></i></div>
                     <h3>Firefox Playwright</h3>
                     <p>GeckoDriver alapú böngésző automatizáció, amely minimalizálja a bot detektálás esélyét és természetes böngészést szimulál.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-list-check"></i></div>
+                    <div class="feature-icon"><i class="ph ph-check-square"></i></div>
                     <h3>Smart Checkbox Kezelés</h3>
                     <p>Automatikusan kijelöli az önéletrajzokat és a kötelező GDPR nyilatkozatokat, de okosan kihagyja a marketing célú megkereséseket.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-cookie-bite"></i></div>
+                    <div class="feature-icon"><i class="ph ph-cookie"></i></div>
                     <h3>Session Mentés</h3>
                     <p>Sikeres bejelentkezés után a cookie-kat elmenti, így a következő futások alkalmával nem igényel újbóli belépést.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="feature-icon"><i class="ph ph-shield-check"></i></div>
                     <h3>Biztonságos Működés</h3>
                     <p>Az adataid és a jelszavad kizárólag a te helyi gépeden, a config.json fájlban tárolódnak. Semmit sem küldünk külső szerverre.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-flask"></i></div>
+                    <div class="feature-icon"><i class="ph ph-flask"></i></div>
                     <h3>Dry-Run Mód</h3>
                     <p>Szimulált futás: tesztelheted a működést, a bot kitölt mindent, de nem küldi el ténylegesen a jelentkezést.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-route"></i></div>
+                    <div class="feature-icon"><i class="ph ph-signpost"></i></div>
                     <h3>Guided Üzemmód</h3>
                     <p>Dönts te minden egyes állásról a terminálban egyetlen gombnyomással (y/n/skip) a teljes kontroll érdekében.</p>
                 </div>
@@ -175,11 +175,11 @@
                         <h3><span class="step-num">1</span> Telepítés</h3>
                         <p>Klónozd a tárolót és telepítsd a szükséges csomagokat:</p>
                         <div class="code-box">
-                            <code id="code-install">git clone https://github.com/domedav/profession-bot.git
+<code id="code-install">git clone https://github.com/domedav/profession-bot.git
 cd profession-bot
 pip install -r requirements.txt
 playwright install firefox</code>
-                            <button class="copy-btn" id="install-copy-btn-1" onclick="copyCode(this)" aria-label="Kód másolása"><i class="fa-regular fa-copy"></i></button>
+                            <button class="copy-btn" id="install-copy-btn-1" onclick="copyCode(this)" aria-label="Kód másolása"><i class="ph ph-copy"></i></button>
                         </div>
                     </div>
 
@@ -188,8 +188,8 @@ playwright install firefox</code>
                         <h3><span class="step-num">2</span> Konfigurálás</h3>
                         <p>Indítsd el a beállító varázslót a fiókod és bérigényed megadásához:</p>
                         <div class="code-box">
-                            <code id="code-config">python3 autoapply.py --config</code>
-                            <button class="copy-btn" id="install-copy-btn-2" onclick="copyCode(this)" aria-label="Kód másolása"><i class="fa-regular fa-copy"></i></button>
+<code id="code-config">python3 autoapply.py --config</code>
+                            <button class="copy-btn" id="install-copy-btn-2" onclick="copyCode(this)" aria-label="Kód másolása"><i class="ph ph-copy"></i></button>
                         </div>
                     </div>
 
@@ -198,12 +198,12 @@ playwright install firefox</code>
                         <h3><span class="step-num">3</span> Futtatás</h3>
                         <p>Futtasd a botot számodra megfelelő üzemmódban:</p>
                         <div class="code-box">
-                            <code id="code-run"># Guided mód manuális jóváhagyással
+<code id="code-run"># Guided mód manuális jóváhagyással
 python3 autoapply.py --guided
 
 # Vagy biztonságos tesztelés jelentkezés nélkül
 python3 autoapply.py --dry-run</code>
-                            <button class="copy-btn" id="install-copy-btn-3" onclick="copyCode(this)" aria-label="Kód másolása"><i class="fa-regular fa-copy"></i></button>
+                            <button class="copy-btn" id="install-copy-btn-3" onclick="copyCode(this)" aria-label="Kód másolása"><i class="ph ph-copy"></i></button>
                         </div>
                     </div>
                 </div>
@@ -225,11 +225,11 @@ python3 autoapply.py --dry-run</code>
             const code = btn.previousElementSibling.innerText;
             navigator.clipboard.writeText(code).then(() => {
                 const icon = btn.querySelector('i');
-                icon.className = 'fa-solid fa-check';
+                icon.className = 'ph ph-check';
                 btn.style.background = 'rgba(74, 222, 128, 0.2)';
                 btn.style.color = '#4ade80';
                 setTimeout(() => {
-                    icon.className = 'fa-regular fa-copy';
+                    icon.className = 'ph ph-copy';
                     btn.style.background = '';
                     btn.style.color = '';
                 }, 2000);
@@ -244,9 +244,9 @@ python3 autoapply.py --dry-run</code>
             navLinksContainer.classList.toggle('active');
             const icon = menuToggleBtn.querySelector('i');
             if (navLinksContainer.classList.contains('active')) {
-                icon.className = 'fa-solid fa-xmark';
+                icon.className = 'ph ph-x';
             } else {
-                icon.className = 'fa-solid fa-bars';
+                icon.className = 'ph ph-list';
             }
         });
 
@@ -255,7 +255,7 @@ python3 autoapply.py --dry-run</code>
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navLinksContainer.classList.remove('active');
-                menuToggleBtn.querySelector('i').className = 'fa-solid fa-bars';
+                menuToggleBtn.querySelector('i').className = 'ph ph-list';
             });
         });
 
