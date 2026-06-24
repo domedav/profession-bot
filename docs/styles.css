@@ -69,14 +69,14 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
 }
 
 /* Header & Navbar */
 header {
-    background: rgba(10, 11, 16, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(10, 11, 16, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
@@ -108,6 +108,17 @@ nav {
 .logo-icon {
     color: var(--primary-color);
     font-size: 1.6rem;
+}
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 101;
 }
 
 .nav-links {
@@ -169,7 +180,7 @@ nav {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 4rem;
-    padding: 6rem 2rem;
+    padding: 6rem 1.5rem;
     align-items: center;
 }
 
@@ -210,6 +221,7 @@ nav {
 .cta-buttons {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 /* Terminal Mockup */
@@ -224,6 +236,7 @@ nav {
     height: 380px;
     display: flex;
     flex-direction: column;
+    max-width: 100%;
 }
 
 .terminal-header {
@@ -260,6 +273,7 @@ nav {
     padding: 1.25rem;
     flex-grow: 1;
     overflow-y: auto;
+    overflow-x: auto;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
@@ -267,6 +281,7 @@ nav {
 
 .line {
     color: #e5e7eb;
+    white-space: nowrap;
 }
 
 .line.comment { color: #6b7280; }
@@ -290,7 +305,7 @@ nav {
 
 /* Features Section */
 .features {
-    padding: 6rem 2rem;
+    padding: 6rem 1.5rem;
     text-align: center;
 }
 
@@ -308,7 +323,7 @@ nav {
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
@@ -355,14 +370,14 @@ nav {
 /* Interactive Guide */
 .interactive-guide {
     background: var(--bg-secondary);
-    padding: 6rem 2rem;
+    padding: 6rem 1.5rem;
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
 }
 
 .guide-steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2.5rem;
     margin-top: 3rem;
 }
@@ -406,7 +421,7 @@ nav {
     background: #08090d;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 1rem;
+    padding: 1.25rem 1rem;
     position: relative;
     font-family: var(--font-mono);
     font-size: 0.85rem;
@@ -439,7 +454,7 @@ nav {
 
 /* Footer */
 footer {
-    padding: 4rem 2rem;
+    padding: 4rem 1.5rem;
     background: var(--bg-primary);
     text-align: center;
     border-top: 1px solid var(--border-color);
@@ -467,11 +482,15 @@ footer {
     .hero {
         grid-template-columns: 1fr;
         gap: 3rem;
-        padding: 4rem 2rem;
+        padding: 4rem 1.5rem;
     }
     
     .hero-content {
         text-align: center;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.8rem;
     }
     
     .hero-content .subtitle {
@@ -480,5 +499,66 @@ footer {
     
     .cta-buttons {
         justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 11, 16, 0.95);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border-color);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .nav-links a {
+        font-size: 1.1rem;
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+
+    .nav-links a.btn {
+        justify-content: center;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-subtitle {
+        margin-bottom: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-terminal {
+        height: 320px;
     }
 }
