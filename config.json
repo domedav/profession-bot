@@ -6,12 +6,12 @@
   "salary_period": "monthly",
   "keyword_filter": [],
   "exclude_keywords": [],
-  "max_pages": 25,
-  "max_applications_per_run": 100,
+  "max_pages": 15,
+  "max_applications_per_run": 50,
   "headless": false,
   "wait_between_actions": [
-    4,
-    8
+    5,
+    6
   ],
   "cover_letter": "",
   "upload_cv_from_profile": true,
