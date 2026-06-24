@@ -57,12 +57,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- Phosphor Icons CSS -->
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/css/style.css">
+    <!-- Phosphor Icons CSS (Regular weight) -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
 </head>
 <body>
-    <div class="glass-bg"></div>
-    <div class="glass-bg-2"></div>
+    <!-- Background Ambient Glows -->
+    <div class="bg-glows-container">
+        <div class="glass-bg"></div>
+        <div class="glass-bg-2"></div>
+    </div>
 
     <!-- Header / Navbar -->
     <header>
@@ -72,19 +75,9 @@
                 <span>Profession<span>Bot</span></span>
             </div>
             
-            <!-- Mobile Menu Toggle Button (Sandwich Menu) -->
-            <button class="menu-toggle" id="menu-toggle-btn" aria-label="Menü megnyitása">
-                <i class="ph ph-list"></i>
-            </button>
-
-            <div class="nav-links" id="nav-links-container">
-                <a href="#features" id="nav-features-link">Funkciók</a>
-                <a href="#install" id="nav-install-link">Telepítés</a>
-                <a href="#usage" id="nav-usage-link">Használat</a>
-                <a href="https://github.com/domedav/profession-bot" target="_blank" class="btn btn-secondary" id="nav-github-link">
-                    <i class="ph ph-github-logo"></i> GitHub
-                </a>
-            </div>
+            <a href="https://github.com/domedav/profession-bot" target="_blank" class="btn btn-secondary" id="header-github-link">
+                <i class="ph ph-github-logo"></i> GitHub
+            </a>
         </nav>
     </header>
 
@@ -236,29 +229,6 @@ python3 autoapply.py --dry-run</code>
             });
         }
 
-        // Mobile Menu Toggle
-        const menuToggleBtn = document.getElementById('menu-toggle-btn');
-        const navLinksContainer = document.getElementById('nav-links-container');
-        
-        menuToggleBtn.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('active');
-            const icon = menuToggleBtn.querySelector('i');
-            if (navLinksContainer.classList.contains('active')) {
-                icon.className = 'ph ph-x';
-            } else {
-                icon.className = 'ph ph-list';
-            }
-        });
-
-        // Close menu on link click (mobile)
-        const navLinks = navLinksContainer.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navLinksContainer.classList.remove('active');
-                menuToggleBtn.querySelector('i').className = 'ph ph-list';
-            });
-        });
-
         // Terminal animation simulation
         const terminalOutput = document.getElementById('terminal-output');
         const lines = [
@@ -269,7 +239,7 @@ python3 autoapply.py --dry-run</code>
             '<div class="line highlight">--------------------------------------------------</div>',
             '<div class="line bold">[3/15] DevOps Engineer - CloudSystems</div>',
             '<div class="line warning">[!] Nincs megadható bérigény mező az űrlapon. Továbblépés...</div>',
-            '<div class="line prompt">Jelentkezel erre az állásra? [y/n/skip]: <span class="cursor">_</span></div>'
+            '<div class="line prompt">Jelentkezel erre an állásra? [y/n/skip]: <span class="cursor">_</span></div>'
         ];
 
         let lineIndex = 0;
