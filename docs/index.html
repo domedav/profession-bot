@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profession Auto-Apply Bot - Automatikus álláspályázó</title>
+    <meta name="description" content="Automatikus álláspályázó eszköz a profession.hu-hoz Firefox böngésző-automatizációval (Playwright).">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="glass-bg"></div>
+    <div class="glass-bg-2"></div>
+
+    <!-- Header / Navbar -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fa-solid fa-square-poll-horizontal logo-icon"></i>
+                <span>Profession<span>Bot</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Funkciók</a>
+                <a href="#install">Telepítés</a>
+                <a href="#usage">Használat</a>
+                <a href="https://github.com/domedav/profession-bot" target="_blank" class="btn btn-secondary">
+                    <i class="fa-brands fa-github"></i> GitHub
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero container">
+        <div class="hero-content">
+            <span class="badge"><i class="fa-solid fa-sparkles"></i> v1.0 Stabil Verzió</span>
+            <h1>Szerezd meg az álomállásod <span>automatikusan</span></h1>
+            <p class="subtitle">Intelligens álláspályázó asszisztens a profession.hu platformhoz. Böngésző automatizációval tölti ki az űrlapokat, kezeli a nyilatkozatokat, miközben Te a felkészülésre koncentrálhatsz.</p>
+            <div class="cta-buttons">
+                <a href="#install" class="btn btn-primary">Letöltés és Telepítés</a>
+                <a href="https://github.com/domedav/profession-bot" class="btn btn-secondary" target="_blank"><i class="fa-brands fa-github"></i> GitHub Repository</a>
+            </div>
+        </div>
+        <div class="hero-terminal">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="btn-red"></span>
+                    <span class="btn-yellow"></span>
+                    <span class="btn-green"></span>
+                </div>
+                <div class="terminal-title">autoapply.py --guided</div>
+            </div>
+            <div class="terminal-body" id="terminal-output">
+                <div class="line comment"># Profession.hu Automatikus jelentkező indítása...</div>
+                <div class="line">python3 autoapply.py --guided</div>
+                <div class="line success">[✓] Bejelentkezés sikeres! (Munkamenet betöltve a session.json fájlból)</div>
+                <div class="line info">[i] Állások keresése folyamatban... Kulcsszó: 'Szoftverfejlesztő'</div>
+                <div class="line success">[✓] 15 új álláslehetőség találva.</div>
+                <div class="line highlight">--------------------------------------------------</div>
+                <div class="line bold">[1/15] Python Fejlesztő - TechCorp Kft.</div>
+                <div class="line">Bérigény megadása: Bruttó 950,000 HUF (megadva)</div>
+                <div class="line">Önéletrajz kiválasztása: 'cv_2026_pdf' (kijelölve)</div>
+                <div class="line">Adatkezelési nyilatkozatok elfogadása... (sikeres)</div>
+                <div class="line prompt">Jelentkezel erre az állásra? [y/n/skip]: <span class="cursor">_</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features container">
+        <h2 class="section-title">Miért a ProfessionBot?</h2>
+        <p class="section-subtitle">Modern technológiák és biztonságos működés a sikeres pályázatokért.</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-brands fa-firefox"></i></div>
+                <h3>Firefox Playwright</h3>
+                <p>GeckoDriver alapú böngésző automatizáció, amely minimalizálja a bot detektálás esélyét és természetes böngészést szimulál.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-list-check"></i></div>
+                <h3>Smart Checkbox Kezelés</h3>
+                <p>Automatikusan kijelöli az önéletrajzokat és a kötelező GDPR nyilatkozatokat, de okosan kihagyja a marketing célú megkereséseket.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-cookie-bite"></i></div>
+                <h3>Session Mentés</h3>
+                <p>Sikeres bejelentkezés után a cookie-kat elmenti, így a következő futások alkalmával nem igényel újbóli belépést.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Biztonságos Működés</h3>
+                <p>Az adataid és a jelszavad kizárólag a te helyi gépeden, a config.json fájlban tárolódnak. Semmit sem küldünk külső szerverre.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-flask"></i></div>
+                <h3>Dry-Run Mód</h3>
+                <p>Szimulált futás: tesztelheted a működést, a bot kitölt mindent, de nem küldi el ténylegesen a jelentkezést.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-route"></i></div>
+                <h3>Guided Üzemmód</h3>
+                <p>Dönts te minden egyes állásról a terminálban egyetlen gombnyomással (y/n/skip) a teljes kontroll érdekében.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation & Usage -->
+    <section id="install" class="interactive-guide">
+        <div class="container">
+            <h2 class="section-title">Gyors Kezdés</h2>
+            <div class="guide-steps">
+                <!-- Telepítés -->
+                <div class="step-box">
+                    <h3><span class="step-num">1</span> Telepítés</h3>
+                    <p>Klónozd a tárolót és telepítsd a szükséges csomagokat:</p>
+                    <div class="code-box">
+                        <code>git clone https://github.com/domedav/profession-bot.git
+cd profession-bot
+pip install -r requirements.txt
+playwright install firefox</code>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Konfiguráció -->
+                <div class="step-box">
+                    <h3><span class="step-num">2</span> Konfigurálás</h3>
+                    <p>Indítsd el a beállító varázslót a fiókod és bérigényed megadásához:</p>
+                    <div class="code-box">
+                        <code>python3 autoapply.py --config</code>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Futtatás -->
+                <div class="step-box">
+                    <h3><span class="step-num">3</span> Futtatás</h3>
+                    <p>Futtasd a botot számodra megfelelő üzemmódban:</p>
+                    <div class="code-box">
+                        <code># Guided mód manuális jóváhagyással
+python3 autoapply.py --guided
+
+# Vagy biztonságos tesztelés jelentkezés nélkül
+python3 autoapply.py --dry-run</code>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 ProfessionBot. Minden jog fenntartva. Készült a magyar fejlesztői közösség számára.</p>
+            <p>Ez a projekt nyílt forráskódú és az MIT licenc alatt érhető el a <a href="https://github.com/domedav/profession-bot" target="_blank">GitHubon</a>.</p>
+        </div>
+    </footer>
+
+    <script>
+        function copyCode(btn) {
+            const code = btn.previousElementSibling.innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const icon = btn.querySelector('i');
+                icon.className = 'fa-solid fa-check';
+                btn.style.background = 'rgba(74, 222, 128, 0.2)';
+                btn.style.color = '#4ade80';
+                setTimeout(() => {
+                    icon.className = 'fa-regular fa-copy';
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }, 2000);
+            });
+        }
+
+        // Terminal animation simulation
+        const terminalOutput = document.getElementById('terminal-output');
+        const lines = [
+            '<div class="line bold">[2/15] Frontend Fejlesztő - WebStudio Kft.</div>',
+            '<div class="line">Bérigény megadása: Bruttó 900,000 HUF (megadva)</div>',
+            '<div class="line">Önéletrajz: \'cv_2026_pdf\' (kijelölve)</div>',
+            '<div class="line success">[✓] Sikeresen megpályázva!</div>',
+            '<div class="line highlight">--------------------------------------------------</div>',
+            '<div class="line bold">[3/15] DevOps Engineer - CloudSystems</div>',
+            '<div class="line warning">[!] Nincs megadható bérigény mező az űrlapon. Továbblépés...</div>',
+            '<div class="line prompt">Jelentkezel erre az állásra? [y/n/skip]: <span class="cursor">_</span></div>'
+        ];
+
+        let lineIndex = 0;
+        function addTerminalLine() {
+            if (lineIndex < lines.length) {
+                // Remove prompt cursor from previous line if exists
+                const lastPrompt = terminalOutput.querySelector('.prompt');
+                if (lastPrompt) {
+                    lastPrompt.innerHTML = lastPrompt.innerHTML.replace('<span class="cursor">_</span>', 'y');
+                    lastPrompt.classList.remove('prompt');
+                }
+                
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = lines[lineIndex];
+                terminalOutput.appendChild(tempDiv.firstChild);
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                lineIndex++;
+                setTimeout(addTerminalLine, 3000);
+            }
+        }
+        
+        setTimeout(addTerminalLine, 4000);
+    </script>
+</body>
+</html>
