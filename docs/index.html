@@ -153,51 +153,128 @@
                 <div class="feature-card">
                     <div class="feature-icon"><i class="ph ph-signpost"></i></div>
                     <h3>Guided Üzemmód</h3>
-                    <p>Dönts te minden egyes állásról a terminálban egyetlen gombnyomással (y/n/skip) a teljes kontroll érdekében.</p>
+                    <p>Döntz te minden egyes állásról a terminálban egyetlen gombnyomással (y/n/skip) a teljes kontroll érdekében.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Installation & Usage -->
+        <!-- Installation Section (Gyors Kezdés) -->
         <section id="install" class="interactive-guide">
             <div class="container">
                 <h2 class="section-title">Gyors Kezdés</h2>
+                <p class="section-subtitle">Kövesd ezt az 5 egyszerű lépést a bot letöltéséhez és előkészítéséhez.</p>
+                
                 <div class="guide-steps">
-                    <!-- Telepítés -->
+                    <!-- Step 1 -->
                     <div class="step-box">
-                        <h3><span class="step-num">1</span> Telepítés</h3>
-                        <p>Klónozd a tárolót és telepítsd a szükséges csomagokat:</p>
+                        <h3><span class="step-num">1</span> Klónozás (Letöltés)</h3>
+                        <p class="step-description">Töltsd le a bot forráskódját a GitHubról a saját számítógépedre:</p>
                         <div class="code-box">
-<code id="code-install">git clone https://github.com/domedav/profession-bot.git
-cd profession-bot
-pip install -r requirements.txt
-playwright install firefox</code>
+<code id="code-clone">git clone https://github.com/domedav/profession-bot.git</code>
                             <button class="copy-btn" id="install-copy-btn-1" onclick="copyCode(this)" aria-label="Kód másolása"><i class="ph ph-copy"></i></button>
                         </div>
                     </div>
 
-                    <!-- Konfiguráció -->
+                    <!-- Step 2 -->
                     <div class="step-box">
-                        <h3><span class="step-num">2</span> Konfigurálás</h3>
-                        <p>Indítsd el a beállító varázslót a fiókod és bérigényed megadásához:</p>
+                        <h3><span class="step-num">2</span> Lépj be a mappába</h3>
+                        <p class="step-description">Navigálj be a frissen letöltött projekt könyvtárába a terminálban:</p>
                         <div class="code-box">
-<code id="code-config">python3 autoapply.py --config</code>
+<code id="code-cd">cd profession-bot</code>
                             <button class="copy-btn" id="install-copy-btn-2" onclick="copyCode(this)" aria-label="Kód másolása"><i class="ph ph-copy"></i></button>
                         </div>
                     </div>
 
-                    <!-- Futtatás -->
-                    <div class="step-box" id="usage">
-                        <h3><span class="step-num">3</span> Futtatás</h3>
-                        <p>Futtasd a botot számodra megfelelő üzemmódban:</p>
+                    <!-- Step 3 -->
+                    <div class="step-box">
+                        <h3><span class="step-num">3</span> Függőségek telepítése</h3>
+                        <p class="step-description">Telepítsd a program futtatásához szükséges Python csomagokat és könyvtárakat:</p>
                         <div class="code-box">
-<code id="code-run"># Guided mód manuális jóváhagyással
-python3 autoapply.py --guided
-
-# Vagy biztonságos tesztelés jelentkezés nélkül
-python3 autoapply.py --dry-run</code>
+<code id="code-pip">pip install -r requirements.txt</code>
                             <button class="copy-btn" id="install-copy-btn-3" onclick="copyCode(this)" aria-label="Kód másolása"><i class="ph ph-copy"></i></button>
                         </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-box">
+                        <h3><span class="step-num">4</span> Firefox motor letöltése</h3>
+                        <p class="step-description">Töltsd le a Playwright által használt Firefox böngészőmotort az automatizációhoz:</p>
+                        <div class="code-box">
+<code id="code-playwright">playwright install firefox</code>
+                            <button class="copy-btn" id="install-copy-btn-4" onclick="copyCode(this)" aria-label="Kód másolása"><i class="ph ph-copy"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="step-box">
+                        <h3><span class="step-num">5</span> Konfiguráció futtatása</h3>
+                        <p class="step-description">Indítsd el a beállító varázslót. Ez bekéri az e-mail címedet, jelszavadat és a nettó bérigényedet, majd elmenti helyben:</p>
+                        <div class="code-box">
+<code id="code-config">python3 autoapply.py --config</code>
+                            <button class="copy-btn" id="install-copy-btn-5" onclick="copyCode(this)" aria-label="Kód másolása"><i class="ph ph-copy"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Run Modes Section (Futtatási Módok) -->
+        <section id="usage" class="run-modes container">
+            <h2 class="section-title">Futási Módok és Használat</h2>
+            <p class="section-subtitle">A bot három különböző módban futtatható az igényeidnek megfelelően.</p>
+            
+            <div class="modes-grid">
+                <!-- Mode 1: Guided -->
+                <div class="mode-card">
+                    <div class="mode-header">
+                        <span class="mode-tag tag-guided"><i class="ph ph-hand-pointing"></i> Guided (Ajánlott)</span>
+                        <h3>Irányított Üzemmód</h3>
+                    </div>
+                    <p class="mode-desc">A legbiztonságosabb és leginkább kontrollálható futási mód. A bot minden egyes talált állásnál jóváhagyást kér a terminálban a jelentkezés elküldése előtt.</p>
+                    <ul class="mode-options">
+                        <li>Minden talált állásnál dönthetsz a jelentkezés sorsáról.</li>
+                        <li><strong>y / n / skip</strong> billentyűkkel vezérelhető a parancssorból.</li>
+                        <li>A kihagyott állásokat megjegyzi, így többször nem ajánlja fel őket.</li>
+                    </ul>
+                    <div class="code-box">
+<code id="code-run-guided">python3 autoapply.py --guided</code>
+                        <button class="copy-btn" onclick="copyCode(this)" aria-label="Kód másolása"><i class="ph ph-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Mode 2: Dry-Run -->
+                <div class="mode-card">
+                    <div class="mode-header">
+                        <span class="mode-tag tag-dry"><i class="ph ph-flask"></i> Dry-Run</span>
+                        <h3>Szimulációs Üzemmód</h3>
+                    </div>
+                    <p class="mode-desc">Tökéletes az első indításhoz és teszteléshez. A bot megnyitja a böngészőt, belép, kitölti a bérigényt, kiválasztja az önéletrajzot és bejelöli a GDPR mezőket, de <strong>elrejti a Küldés gombot</strong>, így nem küldi be a pályázatot.</p>
+                    <ul class="mode-options">
+                        <li>Biztonságos tesztelés valódi jelentkezés nélkül.</li>
+                        <li>Megtekintheted, hogyan működik a kitöltés folyamata.</li>
+                        <li>Nem fogyasztja a napi jelentkezési limiteket.</li>
+                    </ul>
+                    <div class="code-box">
+<code id="code-run-dry">python3 autoapply.py --dry-run</code>
+                        <button class="copy-btn" onclick="copyCode(this)" aria-label="Kód másolása"><i class="ph ph-copy"></i></button>
+                    </div>
+                </div>
+
+                <!-- Mode 3: Normal -->
+                <div class="mode-card">
+                    <div class="mode-header">
+                        <span class="mode-tag tag-normal"><i class="ph ph-lightning"></i> Autopilot</span>
+                        <h3>Teljesen Automata Üzemmód</h3>
+                    </div>
+                    <p class="mode-desc">Teljesen önműködő, gyors futás. A bot emberi beavatkozás nélkül végigmegy a keresési listán, és automatikusan beküldi a jelentkezéseket a háttérben.</p>
+                    <ul class="mode-options">
+                        <li>Ideális, ha már tesztelted a beállításokat és bízol a bot működésében.</li>
+                        <li>Beavatkozást kizárólag Cloudflare Captcha esetén igényel a böngészőben.</li>
+                        <li>Rendkívül gyors állásbeküldést tesz lehetővé.</li>
+                    </ul>
+                    <div class="code-box">
+<code id="code-run-normal">python3 autoapply.py</code>
+                        <button class="copy-btn" onclick="copyCode(this)" aria-label="Kód másolása"><i class="ph ph-copy"></i></button>
                     </div>
                 </div>
             </div>
@@ -239,7 +316,7 @@ python3 autoapply.py --dry-run</code>
             '<div class="line highlight">--------------------------------------------------</div>',
             '<div class="line bold">[3/15] DevOps Engineer - CloudSystems</div>',
             '<div class="line warning">[!] Nincs megadható bérigény mező az űrlapon. Továbblépés...</div>',
-            '<div class="line prompt">Jelentkezel erre an állásra? [y/n/skip]: <span class="cursor">_</span></div>'
+            '<div class="line prompt">Jelentkezel erre az állásra? [y/n/skip]: <span class="cursor">_</span></div>'
         ];
 
         let lineIndex = 0;

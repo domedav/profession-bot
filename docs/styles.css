@@ -425,12 +425,19 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
 }
 
 .copy-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-main);
+    background: rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.4);
+    color: #a5b4fc;
+}
+
+.copy-btn i {
+    font-size: 1.15rem;
+    display: flex;
 }
 
 /* Footer */
@@ -502,3 +509,103 @@ footer {
         height: 320px;
     }
 }
+
+/* Run Modes Section */
+.run-modes {
+    padding: 6rem 1.5rem;
+}
+
+.modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.mode-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.mode-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.08);
+}
+
+.mode-header {
+    margin-bottom: 1.5rem;
+}
+
+.mode-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tag-guided {
+    background: rgba(99, 102, 241, 0.15);
+    color: #a5b4fc;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.tag-dry {
+    background: rgba(6, 182, 212, 0.15);
+    color: #8be8f9;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.tag-normal {
+    background: rgba(168, 85, 247, 0.15);
+    color: #e0b0ff;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.mode-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.mode-desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.mode-options {
+    list-style-type: none;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.mode-options li {
+    position: relative;
+    padding-left: 1.25rem;
+}
+
+.mode-options li::before {
+    content: "•";
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
