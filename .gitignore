@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Local configuration and credentials
+session.json
+applied_jobs.json
+apply_log.csv
+full_log.txt
+config.json
+
+# IDEs
+.vscode/
+.idea/
+.gemini/
