@@ -63,7 +63,7 @@ EXTERNAL_ATS_SIGS: list[str] = [
     r'taleo\.net', r'oraclecloud\.com', r'jobvite\.com',
     r'greenhouse\.io', r'lever\.co', r'breezy\.hr',
     r'ashbyhq\.com', r'bamboohr\.com', r'personio\.',
-    r'dreamjo\.bs', r'karrier\.', r'careers\.',
+    r'dreamjo\.bs', 
     r'recruitee\.com', r'teamtailor\.com', r'pinpointhq\.com',
     r'Apply With LinkedIn', r'Apply with Indeed',
 ]
@@ -749,14 +749,14 @@ class ProfessionBot:
 
         # ── 4. Detect embedded ATS ──
         full_log("   4. Beágyazott ATS detektálás…")
-        if await self._detect_external_ats():
+        if self.cfg.get("skip_embedded_ats", False) and await self._detect_external_ats():
             full_log("   4. Beágyazott ATS találva → kihagy")
             console.print("[yellow]   ⤤ Beágyazott külső ATS — kihagyva[/yellow]")
             self.stats["external_embedded"] += 1
             self.stats["external"] += 1
             log_row(ts, job["title"], job.get("company", ""), url, "external_embedded", "Embedded ATS")
             return "external"
-        full_log("   4. Nincs beágyazott ATS")
+        full_log("   4. Nincs beágyazott ATS (vagy kihagyás kikapcsolva)")
 
         # ── 5. Login wall ──
         full_log("   5. Bejelentkezési fal ellenőrzése…")

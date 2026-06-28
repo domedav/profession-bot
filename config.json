@@ -17,5 +17,6 @@
   "upload_cv_from_profile": true,
   "accept_marketing": false,
   "user_email": "",
-  "user_password": ""
+  "user_password": "",
+  "skip_embedded_ats": false
 }
