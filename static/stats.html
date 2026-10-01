@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statisztika – Profession Bot</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<noscript><p style="padding:12px;text-align:center">Ehhez az oldalhoz JavaScript szükséges. Kérlek, engedélyezd a JavaScriptet a böngésződben.</p></noscript>
+<header class="topbar">
+<span class="logo">🤖 Profession Bot</span>
+<nav>
+<a href="/">Vezérlőpult</a>
+<a href="/guide.html">Első lépések</a>
+<a href="/config.html">Beállítások</a>
+<a href="/logs.html">Naplók</a>
+<a href="/stats.html">Statisztika</a>
+<a href="/help.html">Súgó</a>
+</nav>
+</header>
+<main>
+<div class="hero">
+<h1>Statisztika 📊</h1>
+<p>Az utolsó futás összesítője és a teljes jelentkezési előzmény, négy számmal: <b>elküldött</b>, <b>megtalált</b>, <b>feldolgozott</b>, <b>sikertelen</b>.</p>
+</div>
+<div class="card">
+<h2>Utolsó futás</h2>
+<div class="row"><button id="btnStats" class="secondary">🔄 Frissítés</button><span id="runMeta" class="hint"></span></div>
+<div class="cards" id="statCards"><div class="stat"><span>Betöltés…</span></div></div>
+</div>
+<div class="card">
+<h2>Előzmények (apply_log.csv)</h2>
+<p class="explain">Minden feldolgozott hirdetés egy sora, legfrissebb elöl. A keresővel cégre, pozícióra vagy státuszra szűrhetsz.</p>
+<div class="row"><label for="histFilter" class="sr-only">Keresés az előzményekben</label><input type="text" id="histFilter" placeholder="Keresés… pl. cégnév vagy státusz"></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Dátum</th><th>Pozíció</th><th>Cég</th><th>Státusz</th></tr></thead>
+<tbody id="histBody"><tr><td colspan="4">Betöltés…</td></tr></tbody>
+</table></div>
+</div>
+</main>
+<footer>Profession Bot · <code>127.0.0.1</code> helyi szerver</footer>
+<script src="/static/js/app.js"></script>
+<script>
+const LABELS = { applied: ["Elküldött jelentkezés", "Ennyi jelentkezést küldött el sikeresen a bot."], total_scraped: ["Megtalált hirdetés", "Ennyi hirdetést gyűjtött össze a keresőoldalakról."], total_processed: ["Feldolgozott", "Ennyi hirdetést nyitott meg és dolgozott fel ténylegesen."], failed: ["Sikertelen", "Ennyi hirdetésnél történt technikai hiba a feldolgozás során."] };
+const ORDER = ["applied", "total_scraped", "total_processed", "failed"];
+let histRows = [];
+async function loadStats() {
+  try {
+    const s = await api("/api/stats");
+    const stats = s.stats || s;
+    $("runMeta").textContent = (s.run_at ? "Futás: " + esc(s.run_at) : "") + (s.duration ? " · Időtartam: " + esc(s.duration) : "") + (s.total_applied_ever !== undefined ? " · Összes jelentkezés valaha: " + esc(s.total_applied_ever) : "");
+    const keys = ORDER.filter((k) => k in stats);
+    $("statCards").innerHTML = (keys.map((k) => { const l = LABELS[k] || [k, ""]; return `<div class="stat"><b>${esc(stats[k])}</b><span>${esc(l[0])}</span><small>${esc(l[1])}</small></div>`; }).join("")) || '<div class="stat"><span>Még nincs futási adat. Indítsd el a botot a Vezérlőpulton.</span></div>';
+  } catch (e) { $("statCards").innerHTML = '<div class="stat"><span>Hiba: ' + esc(e.message) + "</span></div>"; }
+  try {
+    const h = await api("/api/history?limit=500");
+    histRows = Array.isArray(h) ? h : h.history || [];
+    renderHist();
+  } catch (e) { $("histBody").innerHTML = '<tr><td colspan="4">Hiba: ' + esc(e.message) + "</td></tr>"; }
+}
+function renderHist() {
+  const f = $("histFilter").value.trim().toLowerCase();
+  const rows = f ? histRows.filter((r) => JSON.stringify(r).toLowerCase().includes(f)) : histRows;
+  $("histBody").innerHTML = rows.length ? rows.map((r) => `<tr><td>${esc(r.timestamp || r.date || "")}</td><td>${esc(r.job_title || r.title || "")}</td><td>${esc(r.company || "")}</td><td>${esc(r.status || "")}</td></tr>`).join("") : '<tr><td colspan="4">Nincs találat.</td></tr>';
+}
+$("btnStats").onclick = loadStats;
+$("histFilter").oninput = renderHist;
+loadStats();
+</script>
+</body>
+</html>

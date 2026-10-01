@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vezérlőpult – Profession Bot</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<noscript><p style="padding:12px;text-align:center">Ehhez az oldalhoz JavaScript szükséges. Kérlek, engedélyezd a JavaScriptet a böngésződben.</p></noscript>
+<header class="topbar">
+<span class="logo">🤖 Profession Bot</span>
+<nav>
+<a href="/">Vezérlőpult</a>
+<a href="/guide.html">Első lépések</a>
+<a href="/config.html">Beállítások</a>
+<a href="/logs.html">Naplók</a>
+<a href="/stats.html">Statisztika</a>
+<a href="/help.html">Súgó</a>
+</nav>
+</header>
+<main>
+<div class="hero">
+<h1>Vezérlőpult</h1>
+<p>Innen indíthatod a botot. <b>Próba üzemmód (dry_run)</b> csak kitölti az űrlapokat, de nem küldi el a jelentkezést — elsőre mindig ezt használd. A <b>felügyelt mód (guided)</b> minden állásnál megkérdez, mielőtt jelentkezne.</p>
+</div>
+<div class="card">
+<h2>1 · Állapot</h2>
+<p class="explain">A jelvény mutatja, dolgozik-e a bot. Ha sárga kérdésdoboz jelenik meg (pl. „Elfogadod?"), arra a <b>Kérdések</b> kártyán válaszolj — a bot addig várakozik.</p>
+<div class="row"><span>Státusz:</span><span id="statusBadge" class="badge idle">…</span><span id="statusText"></span></div>
+</div>
+<div class="card">
+<h2>2 · Indítás</h2>
+<p class="explain">Válaszd ki az üzemmódot, majd nyomd meg az <b>Indítás</b> gombot. Leállításhoz használd a <b>Leállítás</b> gombot (kegyes leállás: az aktuális lépés után áll meg).</p>
+<div class="row">
+<label class="check"><input type="checkbox" id="dryRun" checked><span>Próba üzemmód (dry_run)<small>Nem küldi el, nem ment a naplóba. Gyakorláshoz.</small></span></label>
+<label class="check"><input type="checkbox" id="guided"><span>Felügyelt mód (guided)<small>Minden jelentkezés előtt engedélyt kér.</small></span></label>
+</div>
+<div class="row">
+<button id="btnStart">▶ Indítás</button>
+<button id="btnStop" class="danger">⏹ Leállítás</button>
+<button id="btnRefresh" class="secondary">🔄 Állapot frissítése</button>
+</div>
+<div id="pendingBox">
+<div class="q"><b>❓ A bot kérdez:</b> <span id="pendingQ"></span></div>
+<div class="row">
+<label for="answerInput" class="sr-only">Válasz</label>
+<input type="text" id="answerInput" placeholder="Írd be a választ…">
+<button id="btnAnswer">OK</button>
+</div>
+<div class="row" id="quickBtns">
+<button class="secondary" data-a="y">igen (y)</button>
+<button class="secondary" data-a="n">nem (n)</button>
+<button class="secondary" data-a="skip">kihagy (skip)</button>
+<button class="secondary" data-a="ok">rendben (ok)</button>
+<button class="secondary" data-a="captcha">captcha kész</button>
+<button class="secondary" data-a="">Jóváhagyás ⏎</button>
+</div>
+<p class="hint">Tipp: bejelentkezésnél a bot böngészőablakában jelentkezz be, majd itt nyomd meg a <b>Jóváhagyás ⏎</b> gombot.</p>
+</div>
+</div>
+<div class="card">
+<h2>3 · Munkamenet</h2>
+<p class="explain">Ha másik fiókkal próbálkoznál, vagy beragadt a bejelentkezés, töröld a mentett böngésző-munkamenetet, és legközelebb újra be kell jelentkezned.</p>
+<div class="row"><button id="btnSession" class="secondary">Kijelentkezés (munkamenet törlése)</button></div>
+<p class="hint">Technikai háttér: ez törli a <code>session.json</code> fájlt. A jelszavadat nem törli.</p>
+</div>
+</main>
+<footer>Profession Bot · <code>127.0.0.1</code> helyi szerver</footer>
+<script src="/static/js/app.js"></script>
+<script>
+async function pollStatus() {
+  try {
+    const s = await api("/api/status");
+    const b = $("statusBadge");
+    b.textContent = s.running ? "FUT" : "ÁLL";
+    b.className = "badge " + (s.running ? "running" : "idle");
+    $("statusText").textContent = s.status || "";
+    if (typeof s.dry_run === "boolean") $("dryRun").checked = s.dry_run;
+    if (typeof s.guided === "boolean") $("guided").checked = s.guided;
+    if (s.pending_question) { $("pendingBox").classList.add("show"); $("pendingQ").textContent = s.pending_question; }
+    else $("pendingBox").classList.remove("show");
+    $("btnStart").disabled = !!s.running;
+  } catch (e) { $("statusBadge").textContent = "HIBA"; }
+}
+async function sendAnswer(v) { await api("/api/answer", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ answer: v }) }); $("answerInput").value = ""; pollStatus(); }
+$("btnStart").onclick = async () => { await api("/api/start", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ dry_run: $("dryRun").checked, guided: $("guided").checked }) }); pollStatus(); };
+$("btnStop").onclick = async () => { await api("/api/stop", { method: "POST" }); pollStatus(); };
+$("btnRefresh").onclick = pollStatus;
+$("btnAnswer").onclick = () => sendAnswer($("answerInput").value);
+document.querySelectorAll("#quickBtns button").forEach((b) => (b.onclick = () => sendAnswer(b.dataset.a)));
+$("btnSession").onclick = async () => { await api("/api/session/clear", { method: "POST" }); alert("Munkamenet törölve. Következő indításkor újra be kell jelentkezned."); };
+setInterval(pollStatus, 2000);
+pollStatus();
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beállítások – Profession Bot</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<noscript><p style="padding:12px;text-align:center">Ehhez az oldalhoz JavaScript szükséges. Kérlek, engedélyezd a JavaScriptet a böngésződben.</p></noscript>
+<header class="topbar">
+<span class="logo">🤖 Profession Bot</span>
+<nav>
+<a href="/">Vezérlőpult</a>
+<a href="/guide.html">Első lépések</a>
+<a href="/config.html">Beállítások</a>
+<a href="/logs.html">Naplók</a>
+<a href="/stats.html">Statisztika</a>
+<a href="/help.html">Súgó</a>
+</nav>
+</header>
+<main>
+<div class="hero">
+<h1>Beállítások ⚙️</h1>
+<p>Itt adhatod meg a bejelentkezési adataidat és a keresési feltételeket. A jelszó mezőt <b>üresen hagyva</b> a mentett jelszó változatlan marad. Mentés előtt a szerver ellenőrzi az adatokat, hibánál piros üzenetet kapsz.</p>
+</div>
+<div class="card">
+<h2>Fiók és keresés</h2>
+<form id="configForm" class="form-grid">
+<div class="full"><label for="search_url">Keresési oldal címe (search_url)</label><input type="url" id="search_url" placeholder="https://www.profession.hu/allasok/…"><small>A profession.hu-n beállított szűrőkkel ellátott oldal teljes címe. Innen gyűjti a bot az álláshirdetéseket.</small></div>
+<div><label for="user_email">E-mail cím</label><input type="text" id="user_email" autocomplete="username"><small>A profession.hu fiókod belépési e-mail címe. A bot ezzel tölti ki a bejelentkezést.</small></div>
+<div><label for="user_password">Jelszó (üresen = változatlan)</label><input type="password" id="user_password" autocomplete="current-password" placeholder="••••••"><small>Csak akkor írd be, ha változtatni akarsz. A szerver <code>***</code>-ként rejti el visszaolvasáskor.</small></div>
+<div><label for="salary_amount">Fizetési igény (Ft, nettó/hó)</label><input type="number" id="salary_amount" placeholder="pl. 800000"><small>Üresen hagyhatod, ha nem akarsz bérigényt megadni. Ezt írja be a bot a „bérigény" mezőbe.</small></div>
+<div><label for="max_pages">Maximum oldalszám</label><input type="number" id="max_pages"><small>Hány találati oldalt nézzen végig egy futás alatt. Nagy szám = sok állás, hosszú futás.</small></div>
+<div class="full"><label for="max_applications_per_run">Jelentkezési limit futásonként</label><input type="number" id="max_applications_per_run"><small>Biztonsági fék: ennél több jelentkezést nem küld egy indítás alatt.</small></div>
+<div><label for="wait_min">Várakozás két lépés között (mp)</label><div class="row"><input type="number" id="wait_min" style="flex:1" placeholder="minimum"><input type="number" id="wait_max" style="flex:1" placeholder="maximum"></div><small>Emberi hatást kelt: a bot véletlenszerűen vár ennyit két kattintás között.</small></div>
+<div class="full"><label for="cover_letter">Motivációs levél sablon</label><textarea id="cover_letter" placeholder="Kedves …"></textarea><small>Ha egy űrlapon van „motivációs levél" mező, ezt másolja be. Üresen hagyhatod.</small></div>
+</form>
+</div>
+<div class="card">
+<h2>Szűrők és kapcsolók</h2>
+<form id="configForm2" class="form-grid">
+<div class="full"><label for="keyword_filter">Kulcsszó szűrő (vesszővel)</label><input type="text" id="keyword_filter" placeholder="pl. hegesztő, távmunka"><small>Csak azokat az állásokat tartja meg, amelyek címében ezek valamelyike szerepel. Üresen = nincs szűrés.</small></div>
+<div class="full"><label for="exclude_keywords">Kizáró szavak (vesszővel)</label><input type="text" id="exclude_keywords" placeholder="pl. vezető, értékesítő"><small>Amelyik címben ezek szerepelnek, azt kihagyja. Üresen = nincs kizárás.</small></div>
+<div><label for="salary_type">Bér típusa</label><input type="text" id="salary_type" placeholder="net"><small>Általában „net". Csak tájékoztató mező.</small></div>
+<div><label for="salary_currency">Pénznem</label><input type="text" id="salary_currency" placeholder="HUF"><small>Általában „HUF".</small></div>
+<div class="full"><label for="salary_period">Időszak</label><input type="text" id="salary_period" placeholder="monthly"><small>Általában „monthly" (havi).</small></div>
+<label class="check"><input type="checkbox" id="headless"><span>Láthatatlan böngésző (headless)<small>Ha be van kapcsolva, nem nyílik Firefox-ablak. Kezdőknek <b>kapcsold ki</b>, hogy lásd, mi történik (és be tudj jelentkezni, captchát megoldani).</small></span></label>
+<label class="check"><input type="checkbox" id="upload_cv_from_profile"><span>Önéletrajz a profilból<small>A bot a profilodba feltöltött CV-t használja jelentkezéskor. Ajánlott bekapcsolva hagyni.</small></span></label>
+<label class="check"><input type="checkbox" id="accept_marketing"><span>Marketing levelek elfogadása<small>Ha be van kapcsolva, a „kérek hírlevelet" jelölőnégyzeteket is bepipálja. Alapból <b>kikapcsolva</b> — így is maradjon.</small></span></label>
+<label class="check"><input type="checkbox" id="skip_embedded_ats"><span>Külső jelentkezési rendszerek kihagyása<small>Egyes cégek külső rendszerbe (pl. Workday) vezetnek. Bekapcsolva a bot ezeket átugorja.</small></span></label>
+<div class="full"><div class="row"><button type="button" id="btnSave">💾 Mentés</button><span id="cfgMsg" class="msg"></span></div></div>
+</form>
+</div>
+</main>
+<footer>Profession Bot · <code>127.0.0.1</code> helyi szerver</footer>
+<script src="/static/js/app.js"></script>
+<script>
+async function loadConfig() {
+  try {
+    const c = await api("/api/config");
+    for (const k of ["search_url","user_email","salary_amount","max_pages","max_applications_per_run","cover_letter","salary_type","salary_currency","salary_period"]) { if (c[k] !== undefined && $(k)) $(k).value = c[k] ?? ""; }
+    for (const k of ["headless","accept_marketing","skip_embedded_ats","upload_cv_from_profile"]) { if (typeof c[k] === "boolean" && $(k)) $(k).checked = c[k]; }
+    $("keyword_filter").value = (c.keyword_filter || []).join(", ");
+    $("exclude_keywords").value = (c.exclude_keywords || []).join(", ");
+    const w = c.wait_between_actions || []; $("wait_min").value = w[0] ?? ""; $("wait_max").value = w[1] ?? "";
+    $("user_password").value = "";
+  } catch (e) { const m = $("cfgMsg"); m.textContent = "Betöltési hiba: " + e.message; m.className = "msg err"; }
+}
+$("btnSave").onclick = async () => {
+  const split = (v) => v.split(",").map((s) => s.trim()).filter(Boolean);
+  const numOrEmpty = (v) => v.trim() === "" ? "" : Number(v);
+  const body = { search_url: $("search_url").value, user_email: $("user_email").value, salary_amount: numOrEmpty($("salary_amount").value), max_pages: numOrEmpty($("max_pages").value), max_applications_per_run: numOrEmpty($("max_applications_per_run").value), salary_type: $("salary_type").value, salary_currency: $("salary_currency").value, salary_period: $("salary_period").value, headless: $("headless").checked, accept_marketing: $("accept_marketing").checked, skip_embedded_ats: $("skip_embedded_ats").checked, upload_cv_from_profile: $("upload_cv_from_profile").checked, keyword_filter: split($("keyword_filter").value), exclude_keywords: split($("exclude_keywords").value), cover_letter: $("cover_letter").value };
+  if ($("user_password").value) body.user_password = $("user_password").value;
+  if ($("wait_min").value !== "" || $("wait_max").value !== "") body.wait_between_actions = [Number($("wait_min").value || 0), Number($("wait_max").value || 0)];
+  const m = $("cfgMsg");
+  try { await api("/api/config", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }); m.textContent = "Elmentve ✓"; m.className = "msg ok"; }
+  catch (e) { m.textContent = "Hiba: " + e.message; m.className = "msg err"; }
+  setTimeout(() => { m.textContent = ""; }, 5000);
+};
+loadConfig();
+</script>
+</body>
+</html>

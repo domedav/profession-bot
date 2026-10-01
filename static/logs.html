@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naplók – Profession Bot</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<noscript><p style="padding:12px;text-align:center">Ehhez az oldalhoz JavaScript szükséges. Kérlek, engedélyezd a JavaScriptet a böngésződben.</p></noscript>
+<header class="topbar">
+<span class="logo">🤖 Profession Bot</span>
+<nav>
+<a href="/">Vezérlőpult</a>
+<a href="/guide.html">Első lépések</a>
+<a href="/config.html">Beállítások</a>
+<a href="/logs.html">Naplók</a>
+<a href="/stats.html">Statisztika</a>
+<a href="/help.html">Súgó</a>
+</nav>
+</header>
+<main>
+<div class="hero">
+<h1>Naplók 📜</h1>
+<p>A bot minden lépését részletesen leírja ide. Ha valami nem működik, <b>itt keresd az okot</b>: ✅ = sikeres jelentkezés, ❌ = hiba, ⚠️ = figyelmeztetés (pl. lejárt munkamenet), 🤖 = captcha (emberi beavatkozás kellett).</p>
+</div>
+<div class="card">
+<h2>Részletes napló (full_log.txt)</h2>
+<div class="row">
+<label for="tailSelect" class="sr-only">Megjelenített sorok</label>
+<select id="tailSelect" style="width:auto">
+<option value="100">utolsó 100 sor</option>
+<option value="300" selected>utolsó 300 sor</option>
+<option value="500">utolsó 500 sor</option>
+<option value="1000">utolsó 1000 sor</option>
+</select>
+<button id="btnLog" class="secondary">🔄 Frissítés</button>
+<label class="check" style="flex:1"><input type="checkbox" id="autoLog" checked><span>Automatikus frissítés (5 mp)</span></label>
+</div>
+<div class="row">
+<label for="logFilter" class="sr-only">Szűrés</label>
+<input type="text" id="logFilter" placeholder="Szűrés szövegre… pl. ✅ vagy captcha vagy cégnév">
+</div>
+<pre id="logPre">Betöltés…</pre>
+<p class="hint">A lista 5 másodpercenként magától frissül. A szűrő csak a megjelenítést szűri, a fájlt nem bántja.</p>
+</div>
+</main>
+<footer>Profession Bot · <code>127.0.0.1</code> helyi szerver</footer>
+<script src="/static/js/app.js"></script>
+<script>
+let allLines = [];
+async function loadLogs() {
+  const t = $("tailSelect").value;
+  try {
+    const d = await api("/api/logs?tail=" + t);
+    const arr = d.logs || d.log || [];
+    allLines = Array.isArray(arr) ? arr : String(arr).split("\n");
+    renderLogs();
+  } catch (e) { $("logPre").textContent = "Napló hiba: " + e.message; }
+}
+function renderLogs() {
+  const f = $("logFilter").value.trim().toLowerCase();
+  const rows = f ? allLines.filter((l) => l.toLowerCase().includes(f)) : allLines;
+  $("logPre").textContent = rows.length ? rows.join("\n") : "(nincs találat a szűrőre)";
+}
+$("btnLog").onclick = loadLogs;
+$("tailSelect").onchange = loadLogs;
+$("logFilter").oninput = renderLogs;
+setInterval(() => { if ($("autoLog").checked) loadLogs(); }, 5000);
+loadLogs();
+</script>
+</body>
+</html>

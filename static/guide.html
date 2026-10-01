@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Első lépések – Profession Bot</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<noscript><p style="padding:12px;text-align:center">Ehhez az oldalhoz JavaScript szükséges. Kérlek, engedélyezd a JavaScriptet a böngésződben.</p></noscript>
+<header class="topbar">
+<span class="logo">🤖 Profession Bot</span>
+<nav>
+<a href="/">Vezérlőpult</a>
+<a href="/guide.html">Első lépések</a>
+<a href="/config.html">Beállítások</a>
+<a href="/logs.html">Naplók</a>
+<a href="/stats.html">Statisztika</a>
+<a href="/help.html">Súgó</a>
+</nav>
+</header>
+<main>
+<div class="hero">
+<h1>Első lépések 👣</h1>
+<p>Kövesd ezt az 5 lépést sorban. Ha most látod először a botot, kb. 10 perc alatt üzemkész leszel.</p>
+</div>
+<div class="card">
+<h2>A folyamat áttekintése</h2>
+<div class="steps">
+<div class="step"><b class="num">1</b><b>Beállítások kitöltése</b> — add meg az e-mail címed, jelszavad és a keresési URL-t a <a href="config.html">Beállítások</a> oldalon. Minden mező alatt ott a magyarázat.</div>
+<div class="step"><b class="num">2</b><b>Próbafutás</b> — a <a href="index.html">Vezérlőpulton</a> pipáld be a próba üzemmódot, és indítsd el. A bot kitölti az űrlapokat, de nem küldi el.</div>
+<div class="step"><b class="num">3</b><b>Bejelentkezés</b> — a felnyíló Firefox-ablakban jelentkezz be a profession.hu-ra, majd a sárga kérdésdobozban nyomd meg a <b>Jóváhagyás ⏎</b> gombot.</div>
+<div class="step"><b class="num">4</b><b>Napló ellenőrzése</b> — nézd meg a <a href="logs.html">Naplók</a> oldalon, hogy minden rendben ment-e (zöld ✅ = sikeres).</div>
+<div class="step"><b class="num">5</b><b>Élesítés</b> — ha a próba jó volt, vedd ki a pipát a próba üzemmód elől, és indítsd újra. Először érdemes a felügyelt módot is bekapcsolni.</div>
+</div>
+</div>
+<div class="card">
+<h2>Keresési URL beszerzése</h2>
+<p class="explain">Nyisd meg a profession.hu-t, állítsd be a szűrőket (munkakör, város, fizetés), majd másold ki a böngésző címsorából a teljes címet, és illeszd be a Beállítások oldalon a <code>search_url</code> mezőbe.</p>
+</div>
+<div class="card">
+<h2>Üzemmódok magyarázata</h2>
+<p class="explain"><b>Próba (dry_run):</b> a bot mindent megcsinál a Küldés gomb megnyomásáig, vár 10 másodpercet (hogy megnézhesd), majd továbblép. Semmit nem küld el, és nem írja be a naplóba mint jelentkezett.</p>
+<p class="explain"><b>Felügyelt (guided):</b> minden egyes állásnál megkérdezi: „Elfogadod? [y/n/skip]". Az <b>y</b> jelenti, <b>n</b> kihagyja, <b>skip</b> végleg átugorja az adott hirdetést.</p>
+<p class="explain">A kettő <b>kombinálható</b>: próba + felügyelt = a legbiztonságosabb ismerkedés a bottal.</p>
+</div>
+</main>
+<footer>Profession Bot · <code>127.0.0.1</code> helyi szerver</footer>
+<script src="/static/js/app.js"></script>
+</body>
+</html>

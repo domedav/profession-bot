@@ -16,7 +16,7 @@
 ╚══════════════════════════════════════════════════════════════════╝
 """
 
-import asyncio, csv, json, random, re, sys, traceback
+import asyncio, csv, json, os, random, re, sys, traceback
 from datetime import datetime, timezone
 from pathlib import Path
 from collections import Counter
@@ -37,7 +37,11 @@ except ImportError:
     console = _Fallback()
 
 # ═══════════════ Constants ═══════════════
-BASE_DIR: Path = Path(__file__).resolve().parent
+def _get_base_dir() -> Path:
+    if getattr(sys, "frozen", False):
+        return Path(sys.executable).resolve().parent
+    return Path(__file__).resolve().parent
+BASE_DIR: Path = _get_base_dir()
 CONFIG_PATH: Path = BASE_DIR / "config.json"
 SESSION_PATH: Path = BASE_DIR / "session.json"
 APPLIED_PATH: Path = BASE_DIR / "applied_jobs.json"
@@ -94,12 +98,23 @@ import os, select
 os.environ["MOZ_ENABLE_WAYLAND"] = "0"
 
 def was_enter_pressed() -> bool:
-    """Checks if Enter key was pressed on stdin (Linux non-blocking)."""
+    """Checks if Enter key was pressed on stdin (Windows + Linux non-blocking)."""
+    if os.name == "nt":
+        try:
+            import msvcrt
+            if msvcrt.kbhit():
+                ch = msvcrt.getwch()
+                return ch in ("\r", "\n")
+            return False
+        except Exception:
+            return False
     try:
         r, _, _ = select.select([sys.stdin], [], [], 0)
         if r:
             sys.stdin.readline()  # consume input
             return True
+    except (IOError, OSError, ValueError):
+        return False
     except Exception:
         pass
     return False
@@ -1411,6 +1426,13 @@ v1.0 jellemzők (a bot első működő verziója):
   - Optimalizált I/O (bad_domains batch mentés)
   - Precíz fizetési mező detektálás (kevesebb false positive)
 """)
+
+WEB_INPUT_HANDLER = None
+def web_ask(prompt: str) -> str:
+    if WEB_INPUT_HANDLER is not None:
+        return WEB_INPUT_HANDLER(prompt)
+    return input(prompt)
+
 
 async def main() -> None:
     args = sys.argv[1:]

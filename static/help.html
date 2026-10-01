@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Súgó – Profession Bot</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<noscript><p style="padding:12px;text-align:center">Ehhez az oldalhoz JavaScript szükséges. Kérlek, engedélyezd a JavaScriptet a böngésződben.</p></noscript>
+<header class="topbar">
+<span class="logo">🤖 Profession Bot</span>
+<nav>
+<a href="/">Vezérlőpult</a>
+<a href="/guide.html">Első lépések</a>
+<a href="/config.html">Beállítások</a>
+<a href="/logs.html">Naplók</a>
+<a href="/stats.html">Statisztika</a>
+<a href="/help.html">Súgó</a>
+</nav>
+</header>
+<main>
+<div class="hero">
+<h1>Súgó ❓</h1>
+<p>Gyakori kérdések és hibaelhárítás, közérthetően. Ha elakadsz, először a <a href="logs.html">Naplók</a> oldalon keresd a hibaüzenetet.</p>
+</div>
+<div class="card faq">
+<h2>Gyakori kérdések</h2>
+<details open><summary>Mi történik, ha elindítom a botot?</summary><p>A bot Firefoxban megnyitja a profession.hu-t, bejelentkezik (ha kell, szólsz neki), végigmegy a keresési találatokon, kitölti az űrlapokat és elküldi a jelentkezéseket. Minden lépést naplóz, a végén összesítést készít.</p></details>
+<details><summary>Biztonságos megadni a jelszavam?</summary><p>A jelszó a saját gépeden, a <code>config.json</code> fájlban tárolódik, és a szerver csak a te gépeden (<code>127.0.0.1</code>) érhető el — külső hálózatról nem. Ettől még igaz: soha ne oszd meg a config fájlt, és használj egyedi jelszót.</p></details>
+<details><summary>Mi az a captcha, és mit csináljak vele?</summary><p>Emberi ellenőrzés („bizonyítsd be, hogy nem vagy robot"). Ilyenkor a bot megáll és sárga dobozban kér. Oldd meg a felnyílt Firefox-ablakban, majd nyomd meg az <b>captcha kész</b> gombot a Vezérlőpulton.</p></details>
+<details><summary>„Külső oldal" (external) státuszt látok. Ez baj?</summary><p>Nem. Azt jelenti, hogy az adott cég nem a profession.hu űrlapján, hanem saját/külső rendszerben (pl. Workday, Greenhouse) várja a jelentkezést — oda a bot nem tud automatikusan jelentkezni. Ezeket kézzel érdemes megnézni.</p></details>
+<details><summary>Beragadt a „FUT" állapot, pedig már nem csinál semmit</summary><p>A Leállítás gomb kegyes leállást kér. Ha a böngészőablak már zárva van, de a jelvény még FUT: várj 10–20 másodpercet, frissíts, és ha kell, indítsd újra a szervert (<code>run.sh</code> / <code>run.bat</code> újra).</p></details>
+<details><summary>Elrontottam a beállításokat. Hogyan kezdjem újra?</summary><p>A Beállítások oldalon javítsd ki és mentsd el — a következő indítás már az újat használja. Ha teljesen elvesztél: állítsd vissza a <code>config.json</code>-t a biztonsági másolatodból (érdemes menteni róla egyet az első jó beállítás után).</p></details>
+</div>
+<div class="card">
+<h2>Parancssori (CLI) megfelelő — haladóknak</h2>
+<p class="explain">A webes felület ugyanazt tudja, mint a terminál. Egyenértékű parancsok:</p>
+<p class="explain"><code>python3 autoapply.py</code> → Vezérlőpult → Indítás (módok nélkül)<br>
+<code>python3 autoapply.py --dry-run</code> → próba üzemmód pipával<br>
+<code>python3 autoapply.py --guided</code> → felügyelt mód pipával<br>
+<code>python3 autoapply.py --config</code> → Beállítások oldal<br>
+<code>python3 profession_autoapply_tests.py</code> → fejlesztői teszt (csak terminálban)</p>
+</div>
+</main>
+<footer>Profession Bot · <code>127.0.0.1</code> helyi szerver</footer>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
