@@ -1,0 +1,25 @@
+{
+  "run_at": "2026-06-28T19:03:08.045785+00:00",
+  "duration": "2:50:04.056015",
+  "dry_run": false,
+  "guided": false,
+  "interrupted": false,
+  "stats": {
+    "total_scraped": 300,
+    "total_processed": 292,
+    "applied": 159,
+    "already_applied": 8,
+    "external": 129,
+    "external_embedded": 0,
+    "no_apply_button": 0,
+    "captcha_hit": 0,
+    "login_wall": 0,
+    "failed": 4,
+    "skipped_manual": 0,
+    "guided_skipped": 0,
+    "dry_run": 0,
+    "page_load_failure": 0
+  },
+  "top_external_domains": {},
+  "total_applied_ever": 672
+}
