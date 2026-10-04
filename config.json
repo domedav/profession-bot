@@ -1,22 +1,22 @@
 {
-  "search_url": "https://www.profession.hu/allasok/1,0,0,szoftverfejleszt%C5%91%401%401?keywordsearch",
-  "salary_amount": null,
+  "search_url": "https://www.profession.hu/allasok/1,0,0,%c3%bcgyint%c3%a9z%c5%91%401%401?keywordsearch",
+  "salary_amount": 429990,
   "salary_type": "net",
   "salary_currency": "HUF",
   "salary_period": "monthly",
   "keyword_filter": [],
   "exclude_keywords": [],
-  "max_pages": 15,
-  "max_applications_per_run": 50,
+  "max_pages": 99,
+  "max_applications_per_run": 1550,
   "headless": false,
   "wait_between_actions": [
-    5,
-    6
+    3,
+    5
   ],
   "cover_letter": "",
   "upload_cv_from_profile": true,
   "accept_marketing": false,
-  "user_email": "",
-  "user_password": "",
+  "user_email": "domedav@tutamail.com",
+  "user_password": "Ww!)}2mKh)J_>zA",
   "skip_embedded_ats": false
 }
