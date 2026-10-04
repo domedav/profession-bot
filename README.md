@@ -1,6 +1,6 @@
-# 🦊 Profession.hu Auto-Apply Bot v1.0
+# 🦊 Profession.hu Auto-Apply Bot
 
-Automatikus álláspályázó eszköz a profession.hu-hoz Firefox böngésző-automatizációval (Playwright). A bot az első stabil működő verziója (v1.0), amely képes bejelentkezni, állásokat gyűjteni, űrlapokat kitölteni és a szükséges adatkezelési és önéletrajz checkboxokat bejelölni.
+Automatikus álláspályázó eszköz a profession.hu-hoz Firefox böngésző-automatizációval (Playwright). A bot képes bejelentkezni, állásokat gyűjteni, űrlapokat kitölteni és a szükséges adatkezelési és önéletrajz checkboxokat bejelölni.
 
 ## ✨ Főbb funkciók
 
